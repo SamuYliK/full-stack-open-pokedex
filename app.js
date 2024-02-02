@@ -7,7 +7,8 @@ const PORT = process.env.PORT || 5000
 app.use(express.static('dist'))
 
 app.get('/version', (req, res) => {
-  res.send('11 - Should still be 7 until merging to main') // change this string to ensure a new version deployed
+  res.send('12 - Once merged') // change this string to ensure a new version deployed
+
 })
 
 app.get('/health', (req, res) => {
