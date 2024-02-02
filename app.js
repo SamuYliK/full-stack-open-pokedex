@@ -8,6 +8,7 @@ app.use(express.static('dist'))
 
 app.get('/version', (req, res) => {
   res.send('12 - Once merged') // change this string to ensure a new version deployed
+
 })
 
 app.get('/health', (req, res) => {
