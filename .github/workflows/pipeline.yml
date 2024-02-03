@@ -31,6 +31,7 @@ jobs:
                 start: npm run start-prod
                 wait-on: http://localhost:5000
             - uses: superfly/flyctl-actions/setup-flyctl@master
+              if: ${{ github.event_name == 'push' && !contains(toJSON(github.event.commits.*.message), '#skip') }}  
             - name: Deploy app
               if: ${{ github.event_name == 'push' && !contains(toJSON(github.event.commits.*.message), '#skip') }}
               run: flyctl deploy --remote-only
@@ -61,10 +62,10 @@ jobs:
               uses: rjstone/discord-webhook-notify@2d99583c5afcbb98ae855619fdfa2f0ec3f371e5
               if: failure()
               env:
-                COMMITS: ${{ toJson(github.event.commits.*.url) }}
+                COMMITS: ${{ toJson(github.event.commits) }}
               with:
                 severity: error
                 text: Build failed
                 description: commit
-                details: "$COMMITS by SamuYliK broke the build :("
+                details: "$COMMITS by SamuYliK broke the build :"
                 webhookUrl: ${{ secrets.DISCORD_WEBHOOK }} 
