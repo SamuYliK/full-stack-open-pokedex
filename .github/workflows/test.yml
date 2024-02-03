@@ -14,5 +14,6 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: test
-              run: |
-                echo ${payload.head_commit.url}
+              env:
+                COMMITS: ${{ toJson(github.event.commits) }}
+              run: echo "$COMMITS"
