@@ -52,12 +52,16 @@ jobs:
               if: success()
               with:
                 severity: info
-                details: Deployment Succeeded!
+                text: A new version of Pokedex deployed
+                details: 'to https://p11-fs-open-pokedex.fly.dev/'
+                footer: 'Severity: Informational'
                 webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: Build failed
               uses: rjstone/discord-webhook-notify@2d99583c5afcbb98ae855619fdfa2f0ec3f371e5
               if: failure()
               with:
                 severity: error
+                text: Build failed
+                description: commit
                 details: Build failed!
                 webhookUrl: ${{ secrets.DISCORD_WEBHOOK }} 
