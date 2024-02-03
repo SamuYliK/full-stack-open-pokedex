@@ -40,13 +40,11 @@ jobs:
             - name: Build failed
               uses: rjstone/discord-webhook-notify@2d99583c5afcbb98ae855619fdfa2f0ec3f371e5
               if: failure()
-              env:
-                COMMITS: ${{ join(github.event.commits.*.url, '') }}
               with:
                 severity: error
                 text: Build failed
                 description: commit
-                details: "$COMMITS by SamuYliK broke the build :("
+                details: ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }} broke the build :(
                 webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
     tag_release:
         if: ${{ github.event_name == 'push' && !contains(toJSON(github.event.commits.*.message), '#skip') }}
