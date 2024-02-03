@@ -53,7 +53,8 @@ jobs:
               with:
                 severity: info
                 text: A new version of Pokedex deployed
-                details: 'to https://p11-fs-open-pokedex.fly.dev/'
+                description: Success!
+                details: 'to https://p11-fs-open-pokedex.fly.dev/ by SamuYliK'
                 footer: 'Severity: Informational'
                 webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: Build failed
