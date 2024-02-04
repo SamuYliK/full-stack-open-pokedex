@@ -18,6 +18,5 @@ jobs:
           with:
             severity: error
             text: Pokedex has stopped working
-            description: 'Pokedex:'
             details: 'https://p11-fs-open-pokedex.fly.dev/ not functional'
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
