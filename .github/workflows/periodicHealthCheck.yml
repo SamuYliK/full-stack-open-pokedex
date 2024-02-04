@@ -1,0 +1,15 @@
+name: Periodic Health Check
+
+on:
+    push:
+      branches:
+          - main
+jobs:
+  periodic_health_check:
+    runs-on: ubuntu-20.04
+    steps:
+        - uses: actions/checkout@v4
+        - name: Check the deployed service url    
+          uses: jtalk/url-health-check-action@b716ccb6645355dd9fcce8002ce460e5474f7f00
+          with:
+            url: https://p11-fs-open-pokedex.fly.dev/|https://p11-fs-open-pokedex.fly.dev/version|https://p11-fs-open-pokedex.fly.dev/health|https://p11-fs-open-pokedex.fly.dev/pokemon/charizard
