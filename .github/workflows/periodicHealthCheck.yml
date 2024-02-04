@@ -1,15 +1,23 @@
 name: Periodic Health Check
 
 on:
-    push:
-      branches:
-          - main
+  schedule:
+    - cron: '11/5 * * * *'
+  
 jobs:
   periodic_health_check:
     runs-on: ubuntu-20.04
     steps:
-        - uses: actions/checkout@v4
         - name: Check the deployed service url    
           uses: jtalk/url-health-check-action@b716ccb6645355dd9fcce8002ce460e5474f7f00
           with:
-            url: https://p11-fs-open-pokedex.fly.dev/|https://p11-fs-open-pokedex.fly.dev/version|https://p11-fs-open-pokedex.fly.dev/health|https://p11-fs-open-pokedex.fly.dev/pokemon/charizard
+            url: https://p11-fs-open-pokedex.fly.dev/|https://p11-fs-open-pokedex.fly.dev/version|https://p11-fs-open-pokedex.fly.dev/health
+        - name: Build failed
+          uses: rjstone/discord-webhook-notify@2d99583c5afcbb98ae855619fdfa2f0ec3f371e5
+          if: failure()
+          with:
+            severity: error
+            text: Pokedex has stopped working
+            description: 'Pokedex:'
+            details: 'https://p11-fs-open-pokedex.fly.dev/ not functional'
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
