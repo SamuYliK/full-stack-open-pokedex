@@ -13,7 +13,7 @@ jobs:
           with:
             url: https://p11-fs-open-pokedex.fly.dev/|https://p11-fs-open-pokedex.fly.dev/version|https://p11-fs-open-pokedex.fly.dev/health
         - name: Build failed
-          uses: rjstone/discord-webhook-notify@2d99583c5afcbb98ae855619fdfa2f0ec3f371e5
+          uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
           if: failure()
           with:
             severity: error
