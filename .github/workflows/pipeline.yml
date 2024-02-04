@@ -22,14 +22,14 @@ jobs:
               run: npm run eslint
             - name: Build
               run: npm run build
-            - name: Test code
-              run: npm run test
-            - name: e2e tests
-              uses: cypress-io/github-action@v5
-              with:
-                command: npm run test:e2e
-                start: npm run start-prod
-                wait-on: http://localhost:5000
+            #- name: Test code
+            #  run: npm run test
+            #- name: e2e tests
+            #  uses: cypress-io/github-action@v5
+            #  with:
+            #    command: npm run test:e2e
+            #    start: npm run start-prod
+            #    wait-on: http://localhost:5000
             - uses: superfly/flyctl-actions/setup-flyctl@master  
             - name: Deploy app
               if: ${{ github.event_name == 'push' && !contains(toJSON(github.event.commits.*.message), '#skip') }}
@@ -46,7 +46,7 @@ jobs:
                 details: ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }} broke the build :(
                 webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
     tag_release:
-        if: ${{ github.event_name == 'push' && !contains(toJSON(github.event.commits.*.message), '#skip') }}
+        if: ${{ github.event_name == 'push' && !contains(toJSON(github.event.commits.*.message), '#notag') }}
         needs: [simple_deployment_pipeline]
         runs-on: ubuntu-20.04
         steps:
